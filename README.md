@@ -37,3 +37,7 @@ The project no longer performs application-level admin authorization. **Without 
 ## New high-resolution artwork update
 
 The public header now uses a new high-resolution crop of the user-supplied `WideScreen_Front.png` at `public/intertwined-logo-banner.jpg`, centered with `object-fit: contain` to avoid distortion. The full supplied artwork is archived at `public/intertwined-widescreen-original.png`. The prior light menu cards, API and admin page remain unchanged. Existing D1 data is not modified on deployment; **do not rerun migrations**.
+
+
+## v3 visual theme (2026-10-19)
+The live public page now uses the provided transparent INTERtwined logo over a native CSS purple/teal backdrop, light readable cards, subtle atmospheric glow, and existing musical notes. All menu items remain API-driven, not baked into a picture. No D1 migration is required for this visual update. Worker name: burgcompetition. Admin API still needs access protection before public sharing.
