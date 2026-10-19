@@ -471,3 +471,69 @@ body{background:#0d0817}
 .board-shell:before,.board-shell:after{background-image:radial-gradient(circle,#9956b5 0 .13vw,transparent .16vw)}
 .board-footer{color:#f9f3ff}
 @media(max-aspect-ratio:4/3){.board-header{grid-template-columns:25vw 1fr}.booster-title{font-size:2vw}}
+
+
+/* INTERtwined competition display refinement – 2026-10-19
+   Header: one centered event identity, no generic competition banner.
+   Menu: light, high-contrast panels for readability on TVs. */
+.board-header{
+  height:15.8vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  padding:0 0 1vh;
+}
+.event-mark-hero{
+  width:min(59vw,1120px);
+  height:14.3vh;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:linear-gradient(95deg,#150b23,#261333 50%,#150b23);
+  border:1px solid rgba(63,181,165,.56);
+  border-radius:.75vw;
+  box-shadow:0 .5vh 1.35vh rgba(0,0,0,.32),inset 0 0 1vw rgba(159,87,179,.16);
+}
+.event-mark-hero img{
+  display:block;
+  width:auto;
+  height:100%;
+  max-width:100%;
+  object-fit:contain;
+  object-position:center;
+  filter:contrast(1.08) saturate(1.06);
+}
+/* Clear, light category surfaces with dark ink and teal / violet heading accents. */
+.menu-column .category,
+.category{
+  background:linear-gradient(160deg,#ffffff 0%,#f5f1f9 100%);
+  color:#20182c;
+  border-color:#24a995;
+  box-shadow:0 .65vh 1.45vh rgba(0,0,0,.25),inset 0 0 0 .06vw rgba(23,143,130,.10);
+}
+.category h2,
+.category .heading-mark,
+.category .heading-rule{color:#116d68}
+.category .heading-rule{
+  background:linear-gradient(90deg,transparent 0,#29a894 15%,#29a894 45%,transparent 45%,transparent 55%,#29a894 55%,#29a894 85%,transparent 100%) center/100% .12vw no-repeat;
+}
+.category .heading-rule span{background:#f9f6fb;color:#116d68}
+.item-name,.item-price{color:#211a2c}
+.item-desc{color:#51445e}
+.item{border-bottom-color:rgba(42,80,85,.19)}
+.sweet-category{border-color:#a562bf!important}
+.sweet-category h2,.sweet-category .heading-mark,.sweet-category .heading-rule{color:#66317f}
+.sweet-category .heading-rule{
+  background:linear-gradient(90deg,transparent 0,#a562bf 15%,#a562bf 45%,transparent 45%,transparent 55%,#a562bf 55%,#a562bf 85%,transparent 100%) center/100% .12vw no-repeat;
+}
+.sweet-category .heading-rule span{background:#f9f5fb;color:#66317f}
+.sweet-category .item-name,.sweet-category .item-price{color:#281d32}
+.item.sold{background:#ffecf0;border-color:#bd3760}
+.item.sold .item-name,.item.sold .item-price,.item.sold .item-desc{color:#902944}
+@media(max-aspect-ratio:4/3){
+  .board-header{height:15vh}
+  .event-mark-hero{width:75vw;height:13vh}
+}

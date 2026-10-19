@@ -22,3 +22,13 @@ The project no longer performs application-level admin authorization. **Without 
 7. Open `<new-worker-url>/` for the menu and `<new-worker-url>/admin` for management, then adjust Saturday's prices/items on the admin page.
 
 **Note:** The copied migration `0002_real_menu.sql` replaces sample menu data during first initialization, like the original; `0003_add_sweet_treats.sql` preserves/restores Sweet Treats. Do not rerun `0002` manually after making live edits.
+
+
+## October 19, 2026 visual update
+- Public menu: removed the generic COMPETITION CONCESSIONS and secondary title bars; replaced with a centered, cropped INTERtwined event banner.
+- Category panels: changed to ivory-white backgrounds with dark charcoal text and teal/violet accent headings.
+- Admin page and database schema: unchanged.
+- Wrangler worker name: `burgcompetition`; D1 binding uses the separate competition database.
+- This project is intended for the **competition** repository only, not the original BurgConcessions project.
+- IMPORTANT: The admin API must be protected via Cloudflare Access before publishing the URL. Do not rely on hiding `/admin` alone.
+- Because the D1 database was already initialized, **do not rerun migration 0002_real_menu.sql**: it deletes current menu data.
