@@ -32,3 +32,8 @@ The project no longer performs application-level admin authorization. **Without 
 - This project is intended for the **competition** repository only, not the original BurgConcessions project.
 - IMPORTANT: The admin API must be protected via Cloudflare Access before publishing the URL. Do not rely on hiding `/admin` alone.
 - Because the D1 database was already initialized, **do not rerun migration 0002_real_menu.sql**: it deletes current menu data.
+
+
+## New high-resolution artwork update
+
+The public header now uses a new high-resolution crop of the user-supplied `WideScreen_Front.png` at `public/intertwined-logo-banner.jpg`, centered with `object-fit: contain` to avoid distortion. The full supplied artwork is archived at `public/intertwined-widescreen-original.png`. The prior light menu cards, API and admin page remain unchanged. Existing D1 data is not modified on deployment; **do not rerun migrations**.
