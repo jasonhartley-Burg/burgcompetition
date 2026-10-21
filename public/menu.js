@@ -37,13 +37,13 @@ function itemIcon(name=''){
 }
 function categoryIcon(name=''){
   const n=String(name).toLowerCase();
-  const file=n.includes('grill')?'hot-dog':
-    n.includes('snack')?'pretzel':
-    n.includes('drink')?'pepsi':
-    n.includes('sweet')?'cotton-candy':
-    n.includes('add on')?'nachos':
-    n.includes('other')?'menu-generic':'menu-generic';
-  return `<img class="heading-image" src="/menu-icons/${file}.png" alt="">`;
+  const key=n.includes('grill')?'grill':
+    n.includes('snack')?'snacks':
+    n.includes('drink')?'drinks':
+    n.includes('sweet')?'sweets':
+    n.includes('add on')?'addons':
+    n.includes('other')?'other':'other';
+  return `<img class="heading-image" src="/menu-icons/heading-${key}.svg" alt="" aria-hidden="true">`;
 }
 
 function categoryWeight(category){
@@ -88,7 +88,7 @@ async function load(){
     const d=await r.json();
     const cats=d.categories||[];
 
-    const categoryHtml=c=>`<section class="category ${String(c.name||'').toLowerCase().includes('sweet')?'sweet-category':''}"><h2><span class="heading-mark">${categoryIcon(c.name)}</span>${esc(c.name)}<span class="heading-mark">${categoryIcon(c.name)}</span></h2><div class="heading-rule"><span class="rule-dot" aria-hidden="true"></span></div><div class="items">${(c.items||[]).map(i=>`<article class="item ${i.sold_out?'sold':''}"><div class="item-copy"><div class="item-top"><div class="item-price">${money(i.price_cents)}</div><div class="item-name">${esc(i.name)}</div></div>${i.description?`<div class="item-desc">${esc(i.description)}</div>`:''}</div><div class="item-icon" aria-hidden="true">${itemIcon(i.name)}</div>${i.sold_out?'<div class="sold-badge">SOLD OUT</div>':''}</article>`).join('')}</div></section>`;
+    const categoryHtml=c=>`<section class="category ${String(c.name||'').toLowerCase().includes('sweet')?'sweet-category':''}"><h2><span class="heading-mark">${categoryIcon(c.name)}</span><span class="heading-label">${esc(c.name)}</span></h2><div class="heading-rule"><span class="rule-dot" aria-hidden="true"></span></div><div class="items">${(c.items||[]).map(i=>`<article class="item ${i.sold_out?'sold':''}"><div class="item-copy"><div class="item-top"><div class="item-price">${money(i.price_cents)}</div><div class="item-name">${esc(i.name)}</div></div>${i.description?`<div class="item-desc">${esc(i.description)}</div>`:''}</div><div class="item-icon" aria-hidden="true">${itemIcon(i.name)}</div>${i.sold_out?'<div class="sold-badge">SOLD OUT</div>':''}</article>`).join('')}</div></section>`;
 
     if(cats.length){
       // Keep the board balanced while allowing each column and panel to size to its content.
