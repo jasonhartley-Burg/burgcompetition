@@ -75,14 +75,33 @@ function menuFits(){
 }
 
 function fitMenu(){
+  // The footer is an absolute overlay. Reserve its actual onscreen height so
+  // the last rows cannot end up behind the payment and thank-you messages.
   const stages=['fit-rebalance','fit-spacing','fit-type','fit-min'];
   grid.classList.remove(...stages,'compact');
+  grid.style.removeProperty('transform');
+  grid.style.removeProperty('width');
+  grid.style.removeProperty('transform-origin');
 
   if(menuFits()) return;
   for(const stage of stages){
     grid.classList.add(stage);
     void grid.offsetHeight;
     if(menuFits()) return;
+  }
+
+  // Last resort for shorter displays: fit the whole menu into the measured
+  // region above the footer. Transform is visual, so preserve full width.
+  const footer=document.querySelector('.board-footer');
+  if(!footer)return;
+  const top=grid.getBoundingClientRect().top;
+  const allowed=Math.max(1,footer.getBoundingClientRect().top-top-18);
+  const height=grid.getBoundingClientRect().height;
+  if(height>allowed){
+    const scale=Math.max(.70,Math.min(1,allowed/height));
+    grid.style.transformOrigin='top left';
+    grid.style.width=`${(100/scale).toFixed(3)}%`;
+    grid.style.transform=`scale(${scale.toFixed(4)})`;
   }
 }
 

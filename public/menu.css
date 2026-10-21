@@ -680,3 +680,13 @@ body{background:#100a20; padding:1.2vh .55vw}
   width:3.35vw;
   max-width:70px;
 }
+
+/* v3.5: keep menu and footer in separate vertical zones */
+.board-header{height:17vh}
+.event-mark-hero{height:16.2vh;width:min(47vw,990px)}
+.board-footer{bottom:2.4vh;min-height:5.5vh;align-items:flex-end}
+.menu-grid{transform-origin:top left}
+@media(max-aspect-ratio:4/3){
+  .board-header{height:15vh}
+  .event-mark-hero{height:14vh;width:72vw}
+}
