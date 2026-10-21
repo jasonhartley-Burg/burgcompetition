@@ -33,14 +33,17 @@ function itemIcon(name=''){
     [/small cand/, 'small-candies']
   ];
   for(const [re,file] of rules) if(re.test(n)) return icon(file);
-  return '★';
+  return icon('menu-generic');
 }
 function categoryIcon(name=''){
   const n=String(name).toLowerCase();
-  if(n.includes('grill')) return '♨';
-  if(n.includes('drink')) return '★';
-  if(n.includes('sweet')) return '★';
-  return '★';
+  const file=n.includes('grill')?'hot-dog':
+    n.includes('snack')?'pretzel':
+    n.includes('drink')?'pepsi':
+    n.includes('sweet')?'cotton-candy':
+    n.includes('add on')?'nachos':
+    n.includes('other')?'menu-generic':'menu-generic';
+  return `<img class="heading-image" src="/menu-icons/${file}.png" alt="">`;
 }
 
 function categoryWeight(category){
@@ -85,7 +88,7 @@ async function load(){
     const d=await r.json();
     const cats=d.categories||[];
 
-    const categoryHtml=c=>`<section class="category ${String(c.name||'').toLowerCase().includes('sweet')?'sweet-category':''}"><h2><span class="heading-mark">${categoryIcon(c.name)}</span>${esc(c.name)}<span class="heading-mark">${categoryIcon(c.name)}</span></h2><div class="heading-rule"><span>★</span></div><div class="items">${(c.items||[]).map(i=>`<article class="item ${i.sold_out?'sold':''}"><div class="item-copy"><div class="item-top"><div class="item-price">${money(i.price_cents)}</div><div class="item-name">${esc(i.name)}</div></div>${i.description?`<div class="item-desc">${esc(i.description)}</div>`:''}</div><div class="item-icon" aria-hidden="true">${itemIcon(i.name)}</div>${i.sold_out?'<div class="sold-badge">SOLD OUT</div>':''}</article>`).join('')}</div></section>`;
+    const categoryHtml=c=>`<section class="category ${String(c.name||'').toLowerCase().includes('sweet')?'sweet-category':''}"><h2><span class="heading-mark">${categoryIcon(c.name)}</span>${esc(c.name)}<span class="heading-mark">${categoryIcon(c.name)}</span></h2><div class="heading-rule"><span class="rule-dot" aria-hidden="true"></span></div><div class="items">${(c.items||[]).map(i=>`<article class="item ${i.sold_out?'sold':''}"><div class="item-copy"><div class="item-top"><div class="item-price">${money(i.price_cents)}</div><div class="item-name">${esc(i.name)}</div></div>${i.description?`<div class="item-desc">${esc(i.description)}</div>`:''}</div><div class="item-icon" aria-hidden="true">${itemIcon(i.name)}</div>${i.sold_out?'<div class="sold-badge">SOLD OUT</div>':''}</article>`).join('')}</div></section>`;
 
     if(cats.length){
       // Keep the board balanced while allowing each column and panel to size to its content.
@@ -98,12 +101,16 @@ async function load(){
         const c=findCat(matcher); if(!c)return;
         const idx=cats.indexOf(c); used.add(idx); columns[col].push(c);
       };
+      // Fixed display order: Grill above Add Ons; Snacks above Other;
+      // Drinks above Sweet Treats. Keep category contents admin-editable.
       take(n=>n.includes('grill'),0);
+      take(n=>n.includes('add on'),0);
       take(n=>n.includes('snack'),1);
+      take(n=>n.includes('other'),1);
       take(n=>n.includes('drink'),2);
-      take(n=>n.includes('sweet treat'),2);
+      take(n=>n.includes('sweet'),2);
 
-      // Any future categories are placed into the lightest column automatically.
+      // Future categories still go in the lightest column automatically.
       cats.forEach((c,idx)=>{
         if(used.has(idx))return;
         const scores=columns.map(col=>col.reduce((sum,x)=>sum+categoryWeight(x),0));
