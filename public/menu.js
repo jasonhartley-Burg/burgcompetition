@@ -43,7 +43,16 @@ function categoryIcon(name=''){
     n.includes('sweet')?'sweets':
     n.includes('add on')?'addons':
     n.includes('other')?'other':'other';
-  return `<img class="heading-image" src="/menu-icons/heading-${key}.svg" alt="" aria-hidden="true">`;
+  // Inline the six SVG illustrations so deployment cannot serve an old image file.
+  const illustrations={
+    grill:`<path d="M8 20h36v8H8zM12 32h28M16 28l-4 14m24-14 4 14M15 12c0-4 5-4 5-8m6 8c0-4 5-4 5-8m6 8c0-4 5-4 5-8"/>`,
+    snacks:`<path d="M8 22c3-8 9-10 18-10s15 2 18 10l-5 21H13L8 22zM16 22h20M20 32h12M23 12l-2-6m10 6 2-6"/>`,
+    drinks:`<path d="M13 13h27l-4 30H17l-4-30zM11 13h31M25 13l8-9M20 25h13M22 32h9"/>`,
+    sweets:`<path d="M26 8c11 0 18 7 18 17S36 42 26 42 8 35 8 25 15 8 26 8zM18 21l5 5-5 5m16-10-5 5 5 5m-11-5h6"/>`,
+    addons:`<path d="M8 23h36l-5 18H13L8 23zM12 23c0-6 5-11 14-11s14 5 14 11M20 14l-3-7m9 5V5m8 9 3-7M18 31h16"/>`,
+    other:`<path d="M10 19h32v24H10V19zM7 19h38M26 19v24M13 12c0-10 13-6 13 7 0-13 13-17 13-7 0 6-8 7-13 7s-13-1-13-7z"/>`
+  };
+  return `<svg class="heading-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="#e3f8f2" stroke="#29bdae" stroke-width="2"/>${illustrations[key]}</svg>`;
 }
 
 function categoryWeight(category){

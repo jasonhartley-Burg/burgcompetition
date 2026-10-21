@@ -671,3 +671,19 @@ body{background:#100a20; padding:1.2vh .55vw}
 /* Decorative mark only; keep the title readable even in the compact fit stage. */
 .menu-grid.fit-min .category h2 .heading-mark{width:1.85vw;height:1.85vw;min-width:23px;min-height:23px}
 .menu-badge:before,.menu-badge:after{content:none}
+
+/* v3.3 Oct 21: embedded vector heading graphics, visible deploy verification */
+.category h2 .heading-image{width:100%;height:100%;display:block;color:#116d68}
+.sweet-category h2 .heading-image{color:#78369a}
+.board-header{height:16.6vh}
+.event-mark-hero{height:15.8vh}
+.menu-column{gap:1.0vh}
+.board-footer{bottom:1.25vh}
+@media (min-aspect-ratio: 2/1){
+  .board-header{height:12.5vh}
+  .event-mark-hero{height:11.8vh}
+  .menu-column{gap:.8vh}
+  .menu-column .category,.category{padding-top:.48vh;padding-bottom:.55vh}
+  .item{padding-top:.20vh;padding-bottom:.20vh}
+  .board-footer{bottom:.8vh}
+}
