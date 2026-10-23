@@ -11,7 +11,9 @@ function itemIcon(name=''){
   };
 
   const rules=[
-    [/alumni.*shirt|shirt.*alumni/, 'alumni-shirt'],
+    [/alumni.*(?:shirt|tee|t-shirt)|(?:shirt|tee|t-shirt).*alumni/, 'alumni-shirt'],
+    [/star\s*sticker/, 'star-sticker'],
+    [/star\s*patch/, 'star-patch'],
     [/student meal.*hot dog|all beef hot dog|hot dog/, 'hot-dog'],
     [/cheeseburger|hamburger|beyond burger|burger/, 'burger'],
     [/student meal.*pizza|pappa.*pizza|pizza/, 'pizza'],
@@ -26,7 +28,7 @@ function itemIcon(name=''){
     [/deluxe add-?on/, 'deluxe-addon'],
     [/chili style add-?on|chili add-?on/, 'chili-addon'],
     [/3d fidget|fidget/, 'fidgets'],
-    [/baked sale/, 'baked-sale'],
+    [/bake\s*sale|baked\s*sale/, 'baked-sale'],
     [/heart spinner/, 'heart-spinners'],
     [/pepsi|soda|pop\b/, 'pepsi'],
     [/gatorade|sports drink/, 'gatorade'],

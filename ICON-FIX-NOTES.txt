@@ -1,0 +1,6 @@
+Menu icon corrections (October 23, 2026)
+- Bake Sale items -> baked-sale.png (existing icon, fixed name matching)
+- Star Sticker -> star-sticker.png (new art)
+- Star Patch -> star-patch.png (new art)
+- Alumni Tee -> alumni-shirt.png (existing icon, fixed name matching)
+- Fidgets and Heart Spinners retained.
