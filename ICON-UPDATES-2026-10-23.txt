@@ -1,0 +1,1 @@
+Added hamburger.png (no cheese) and cheese-pizza.png (no pepperoni). Updated menu.js matching rules so hamburger and Pappa’s Cheese Pizza use these assets, without modifying cheeseburger or pepperoni pizza. Previous sub and other icon fixes retained.
