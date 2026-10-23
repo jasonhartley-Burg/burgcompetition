@@ -17,6 +17,7 @@ function itemIcon(name=''){
     [/student meal.*hot dog|all beef hot dog|hot dog/, 'hot-dog'],
     [/cheeseburger|hamburger|beyond burger|burger/, 'burger'],
     [/student meal.*pizza|pappa.*pizza|pizza/, 'pizza'],
+    [/burg\s*subs?|\bsubs?\b|submarine sandwich/, 'sub-sandwich'],
     [/marching taco|\btaco\b/, 'taco'],
     [/baked potato/, 'baked-potato'],
     [/whole pickle|pickle/, 'pickle'],

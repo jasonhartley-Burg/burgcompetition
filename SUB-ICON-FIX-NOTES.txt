@@ -1,0 +1,3 @@
+2026-10-23: Changed Burg Subs menu row from generic dinner-plate icon to a dedicated sub sandwich graphic.
+Updated public/menu.js name matcher and added public/menu-icons/sub-sandwich.png.
+Retains previous OTHER section icon fixes.
