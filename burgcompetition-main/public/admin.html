@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Competition Menu Administration</title><link rel="stylesheet" href="/admin.css"></head><body>
+<header><div><div class="eyebrow">INTERtwined 2026 • COMPETITION CONCESSIONS</div><h1>Administration</h1></div><div class="header-actions"><a href="/" target="_blank">Open menu board ↗</a></div></header>
+<main>
+<section id="app">
+<div class="toolbar card"><div><strong>Live menu controls</strong><div class="muted">Availability changes update the kiosk within about 5 seconds.</div></div><div><button id="addCategory" class="secondary">+ Category</button><button id="addItem">+ Menu item</button></div></div>
+<div id="categories"></div>
+</section></main>
+<dialog id="itemDialog"><form method="dialog" id="itemForm"><h2 id="itemDialogTitle">Menu item</h2><input type="hidden" id="itemId"><label>Category<select id="itemCategory" required></select></label><label>Item name<input id="itemName" required></label><label>Description<textarea id="itemDescription" rows="3"></textarea></label><div class="two"><label>Price<input id="itemPrice" type="number" min="0" step="0.01" required></label><label>Display order<input id="itemOrder" type="number" step="1" value="0"></label></div><label class="check"><input id="itemActive" type="checkbox" checked> Show on menu</label><div class="dialog-actions"><button value="cancel" class="secondary">Cancel</button><button id="saveItem" value="default">Save item</button></div></form></dialog>
+<dialog id="categoryDialog"><form method="dialog" id="categoryForm"><h2 id="catDialogTitle">Category</h2><input type="hidden" id="catId"><label>Category name<input id="catName" required></label><label>Display order<input id="catOrder" type="number" step="1" value="0"></label><label class="check"><input id="catActive" type="checkbox" checked> Show category</label><div class="dialog-actions"><button value="cancel" class="secondary">Cancel</button><button id="saveCategory" value="default">Save category</button></div></form></dialog>
+<div id="toast"></div><script src="/admin.js"></script></body></html>

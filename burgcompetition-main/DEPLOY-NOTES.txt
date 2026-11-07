@@ -1,0 +1,6 @@
+INTERtwined menu version 2026-10-21 v3.3
+
+The menu page now loads /menu.css?v=20261021-3 and /menu.js?v=20261021-3.
+The six heading images are inlined SVG in menu.js; no separate image URL or cached asset is needed.
+After deploying, open the exact menu.js?v=20261021-3 URL and search for "illustrations" to verify Cloudflare is serving this version.
+If not, the wrong GitHub branch/repository or Cloudflare Worker deployment is being updated.

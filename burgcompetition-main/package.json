@@ -1,0 +1,14 @@
+{
+  "name": "concession-kiosk-menu",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 migrations apply MENU_DB --local",
+    "db:remote": "wrangler d1 migrations apply MENU_DB --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.30.0"
+  }
+}

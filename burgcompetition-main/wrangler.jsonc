@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "burgcompetition",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-10",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+  "d1_databases": [
+    {
+      "binding": "MENU_DB",
+      "database_name": "burg-competition-concessions",
+      "database_id": "8b7b0d67-61d8-4fa6-a914-e529ed2c6df8",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
