@@ -7,10 +7,11 @@ function itemIcon(name=''){
   const n=String(name).toLowerCase();
   const icon=(file,label='')=>{
     const cls=file==='alumni-shirt' ? 'menu-item-image alumni-shirt-icon' : 'menu-item-image';
-    return `<img class="${cls}" src="/menu-icons/${file}.png?v=20261107-icons3" alt="${label}">`;
+    return `<img class="${cls}" src="/menu-icons/${file}.png?v=20261107-icons4" alt="${label}">`;
   };
 
   const rules=[
+    [/clementines?|mandarins?|\boranges?\b/, 'orange'],
     [/bear\s*creek|doughnuts?|donuts?/, 'donut'],
     [/alumni.*(?:shirt|tee|t-shirt)|(?:shirt|tee|t-shirt).*alumni/, 'alumni-shirt'],
     [/star\s*sticker/, 'star-sticker'],
@@ -61,7 +62,7 @@ function categoryIcon(name=''){
     : n.includes('add on') ? 'heading-addons'
     : n.includes('other') ? 'heading-other'
     : 'heading-other';
-  return `<img class="heading-image" src="/menu-icons/${file}.png?v=20261107-icons3" alt="">`;
+  return `<img class="heading-image" src="/menu-icons/${file}.png?v=20261107-icons4" alt="">`;
 }
 
 function categoryWeight(category){
