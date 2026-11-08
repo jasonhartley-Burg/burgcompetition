@@ -7,13 +7,26 @@ async function body(request) {
   try { return await request.json(); } catch { return {}; }
 }
 
+// Separate sale state preserves each item's regular price and existing menu records.
+async function ensureSales(env) {
+  await env.MENU_DB.prepare(`CREATE TABLE IF NOT EXISTS menu_item_sales (
+    item_id INTEGER PRIMARY KEY REFERENCES menu_items(id) ON DELETE CASCADE,
+    on_sale INTEGER NOT NULL DEFAULT 0 CHECK (on_sale IN (0,1))
+  )`).run();
+}
+
 async function getMenu(env, includeInactive = false) {
+  await ensureSales(env);
   const categoryWhere = includeInactive ? '' : 'WHERE active = 1';
   const itemWhere = includeInactive ? '' : 'WHERE active = 1';
   const cats = await env.MENU_DB.prepare(`SELECT * FROM categories ${categoryWhere} ORDER BY display_order, id`).all();
   const items = await env.MENU_DB.prepare(`SELECT * FROM menu_items ${itemWhere} ORDER BY category_id, display_order, id`).all();
+  const sales = await env.MENU_DB.prepare('SELECT item_id FROM menu_item_sales WHERE on_sale=1').all();
+  const saleIds = new Set((sales.results || []).map(s => s.item_id));
   const byCategory = new Map();
   for (const item of items.results || []) {
+    item.on_sale = saleIds.has(item.id) ? 1 : 0;
+    item.sale_price_cents = item.on_sale ? Math.round(item.price_cents / 2) : item.price_cents;
     if (!byCategory.has(item.category_id)) byCategory.set(item.category_id, []);
     byCategory.get(item.category_id).push(item);
   }
@@ -86,6 +99,19 @@ async function api(request, env, url) {
 
   if (itemMatch && method === 'DELETE') {
     await env.MENU_DB.prepare('DELETE FROM menu_items WHERE id=?').bind(Number(itemMatch[1])).run();
+    return json({ success: true });
+  }
+
+  const saleMatch = path.match(/^\/api\/admin\/items\/(\d+)\/on-sale$/);
+  if (saleMatch && method === 'POST') {
+    const id = Number(saleMatch[1]);
+    const b = await body(request);
+    if (typeof b.on_sale !== 'boolean') return json({ error: 'on_sale must be true or false' }, 400);
+    const item = await env.MENU_DB.prepare('SELECT id FROM menu_items WHERE id=?').bind(id).first();
+    if (!item) return json({ error: 'Item not found' }, 404);
+    await ensureSales(env);
+    await env.MENU_DB.prepare(`INSERT INTO menu_item_sales (item_id,on_sale) VALUES (?,?)
+      ON CONFLICT(item_id) DO UPDATE SET on_sale=excluded.on_sale`).bind(id, b.on_sale ? 1 : 0).run();
     return json({ success: true });
   }
 

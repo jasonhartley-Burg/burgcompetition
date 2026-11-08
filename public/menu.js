@@ -119,7 +119,7 @@ async function load(){
     const d=await r.json();
     const cats=d.categories||[];
 
-    const categoryHtml=c=>`<section class="category ${String(c.name||'').toLowerCase().includes('sweet')?'sweet-category':''}"><h2><span class="heading-mark" aria-hidden="true">${categoryIcon(c.name)}</span><span class="heading-label">${esc(c.name)}</span></h2><div class="heading-rule"></div><div class="items">${(c.items||[]).map(i=>`<article class="item ${i.sold_out?'sold':''}"><div class="item-copy"><div class="item-top"><div class="item-price">${money(i.price_cents)}</div><div class="item-name">${esc(i.name)}</div></div>${i.description?`<div class="item-desc">${esc(i.description)}</div>`:''}</div><div class="item-icon" aria-hidden="true">${itemIcon(i.name)}</div>${i.sold_out?'<div class="sold-badge">SOLD OUT</div>':''}</article>`).join('')}</div></section>`;
+    const categoryHtml=c=>`<section class="category ${String(c.name||'').toLowerCase().includes('sweet')?'sweet-category':''}"><h2><span class="heading-mark" aria-hidden="true">${categoryIcon(c.name)}</span><span class="heading-label">${esc(c.name)}</span></h2><div class="heading-rule"></div><div class="items">${(c.items||[]).map(i=>`<article class="item ${i.sold_out?'sold':''}"><div class="item-copy"><div class="item-top"><div class="item-price">${money(i.sale_price_cents ?? i.price_cents)}</div><div class="item-name">${esc(i.name)}${i.on_sale?'<span class="sale-flag">ON SALE · 50% OFF</span>':''}</div></div>${i.description?`<div class="item-desc">${esc(i.description)}</div>`:''}</div><div class="item-icon" aria-hidden="true">${itemIcon(i.name)}</div>${i.sold_out?'<div class="sold-badge">SOLD OUT</div>':''}</article>`).join('')}</div></section>`;
 
     if(cats.length){
       const columns=[[],[],[]];

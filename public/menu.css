@@ -690,3 +690,5 @@ body{background:#100a20; padding:1.2vh .55vw}
   .board-header{height:15vh}
   .event-mark-hero{height:14vh;width:72vw}
 }
+
+.sale-flag{display:inline-block;vertical-align:middle;margin-left:.5em;padding:.18em .4em;border-radius:4px;background:#a51c4c;color:#fff;font-size:.55em;font-weight:900;white-space:nowrap;line-height:1.3}
